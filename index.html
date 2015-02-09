@@ -30,6 +30,10 @@
   <p>Text from a different template...</p>
 </script>
 
+<script type="text/template" id="list-item-template">
+  <li>One Item</li>
+</script>
+
 <script src="./assets/js/vendor/jquery.js"></script>
 <script src="./assets/js/vendor/json2.js"></script>
 <script src="./assets/js/vendor/underscore.js"></script>
@@ -51,10 +55,8 @@
 //    var staticView = new ContactManager.StaticView();
 
     var staticView = new ContactManager.StaticView({
-      id: 'static-view',
-      tagName: 'span',
-      className: 'instruction',
-      template: '#different-static-template'
+      tagName: 'ul',
+      template: '#list-item-template'
     });
 
     ContactManager.mainRegion.show(staticView);

@@ -42,7 +42,15 @@
   ContactManager.Contact = Backbone.Model.extend({});
 
   ContactManager.ContactView = Marionette.ItemView.extend({
-    template: '#contact-template'
+    template: '#contact-template',
+
+    events: {
+      'click p': 'alertPhoneNumber'
+    },
+
+    alertPhoneNumber: function () {
+      alert(this.model.escape('phoneNumber'));
+    }
   });
 
   ContactManager.on('start', function() {

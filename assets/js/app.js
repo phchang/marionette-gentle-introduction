@@ -16,14 +16,11 @@ ContactManager.getCurrentRoute = function () {
 
 ContactManager.on('start', function() {
 
-  var ContactsAppList = ContactManager.module('ContactsApp.List');
-
   if (Backbone.history) {
     Backbone.history.start();
 
     if (this.getCurrentRoute() === '') {
-      this.navigate('contacts');
-      ContactsApp.List.Controller.listContacts();
+      ContactManager.trigger('contacts:list');
     }
   }
 });

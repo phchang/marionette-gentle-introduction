@@ -16,10 +16,7 @@ ContactManager.module('ContactsApp.List',
 
           contactsListView.on('childview:contact:show',
               function (childView, model) {
-
-                var ContactsApp = ContactManager.module('ContactsApp');
-
-                ContactsApp.Show.Controller.showContact(model);
+                ContactManager.trigger('contact:show', model.get('id'));
               });
 
           ContactManager.mainRegion.show(contactsListView);

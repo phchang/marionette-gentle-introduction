@@ -17,14 +17,13 @@ ContactManager.module('ContactsApp.List',
 
         deleteClicked: function (e) {
           e.stopPropagation();
-          /*
-            Although we don’t have direct access to the contacts collection,
-            each model keeps a reference to its parent collection within the
-            collection attribute. Therefore, we can access our contacts
-            collection from within our Contact view instance with
-            this.model.collection.
-           */
-          this.model.collection.remove(this.model);
+          this.trigger('contact:delete', this.model);
+        },
+
+        remove: function () {
+          this.$el.fadeOut(function () {
+            Marionette.ItemView.prototype.remove.call(self);
+          });
         }
       });
 

@@ -31,22 +31,10 @@
 <script src="./assets/js/vendor/underscore.js"></script>
 <script src="./assets/js/vendor/backbone.js"></script>
 <script src="./assets/js/vendor/backbone.marionette.js"></script>
+<script src="./assets/js/app.js"></script>
+<script src="./assets/js/entities/contact.js"></script>
 
 <script type="text/javascript">
-  var ContactManager = new Marionette.Application();
-
-  ContactManager.addRegions({
-    mainRegion: '#main-region'
-  });
-
-  ContactManager.Contact = Backbone.Model.extend({});
-
-  ContactManager.ContactCollection = Backbone.Collection.extend({
-    model: ContactManager.Contact,
-    comparator: function (model) {
-      return model.get('firstName') + model.get('lastName');
-    }
-  });
 
   ContactManager.ContactItemView = Marionette.ItemView.extend({
     tagName: 'li',
@@ -60,32 +48,9 @@
 
   ContactManager.on('start', function() {
 
-    var contacts = new ContactManager.ContactCollection([
-      {
-        firstName: 'Alice',
-        lastName: 'Tampen'
-      },
+    var Entities = ContactManager.module('Entities');
 
-      {
-        firstName: 'Bob',
-        lastName: 'Brigham',
-        phoneNumber: '555-0163'
-      },
-      {
-        firstName: 'Alice',
-        lastName: 'Artsy'
-      },
-      {
-        firstName: 'Alice',
-        lastName: 'Artem',
-        phoneNumber: '555-0184'
-      },
-      {
-        firstName: 'Charlie',
-        lastName: 'Campbell',
-        phoneNumber: '555-0129'
-      }
-    ]);
+    var contacts = ContactManager.request('contact:entities');
 
     var contactsListView = new ContactManager.ContactsView({
       collection: contacts

@@ -9,7 +9,8 @@ ContactManager.module('ContactsApp.List',
           click: 'highlightName'
         },
 
-        highlightName: function () {
+        highlightName: function (e) {
+          e.preventDefault();
           this.$el.toggleClass('warning');
         }
       });

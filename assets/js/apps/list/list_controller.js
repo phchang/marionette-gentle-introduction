@@ -5,7 +5,7 @@ ContactManager.module('ContactsApp.List',
         listContacts: function () {
           var contacts = ContactManager.request('contact:entities');
 
-          var contactsListView = new List.Contacts2({
+          var contactsListView = new List.Contacts({
             collection: contacts
           });
 

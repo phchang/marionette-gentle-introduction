@@ -40,15 +40,10 @@
   ContactManager.on('start', function() {
 
     var Entities = ContactManager.module('Entities');
-    var ContactAppList = ContactManager.module('ContactsApp.List');
+    var ContactsAppList = ContactManager.module('ContactsApp.List');
 
-    var contacts = ContactManager.request('contact:entities');
+    ContactsAppList.Controller.listContacts();
 
-    var contactsListView = new ContactAppList.Contacts({
-      collection: contacts
-    });
-
-    ContactManager.mainRegion.show(contactsListView);
   });
 
   ContactManager.start();

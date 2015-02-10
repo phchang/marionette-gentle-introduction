@@ -34,18 +34,9 @@
 <script src="./assets/js/app.js"></script>
 <script src="./assets/js/entities/contact.js"></script>
 <script src="./assets/js/apps/list/list_view.js"></script>
+<script src="./assets/js/apps/list/list_controller.js"></script>
 
 <script type="text/javascript">
-
-  ContactManager.on('start', function() {
-
-    var Entities = ContactManager.module('Entities');
-    var ContactsAppList = ContactManager.module('ContactsApp.List');
-
-    ContactsAppList.Controller.listContacts();
-
-  });
-
   ContactManager.start();
 </script>
 

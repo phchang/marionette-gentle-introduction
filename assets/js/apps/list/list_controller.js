@@ -14,6 +14,14 @@ ContactManager.module('ContactsApp.List',
                 contacts.remove(model);
               });
 
+          contactsListView.on('childview:contact:show',
+              function (childView, model) {
+
+                var ContactsApp = ContactManager.module('ContactsApp');
+
+                ContactsApp.Show.Controller.showContact(model);
+              });
+
           ContactManager.mainRegion.show(contactsListView);
         }
       }

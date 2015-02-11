@@ -3,20 +3,22 @@ ContactManager.module('ContactsApp.Show',
       Show.Controller = {
         showContact: function (id) {
 
-          var contact = ContactManager.request('contact:entity', id);
+          var fetchingContact = ContactManager.request('contact:entity', id);
 
-          var contactView;
+          $.when(fetchingContact).done(function (contact) {
+            var contactView;
 
-          console.log('show controller / contact = ', contact);
-          if (contact === undefined) {
-            contactView = new Show.MissingContact();
-          } else {
-            contactView = new Show.Contact({
-              model: contact
-            });
-          }
+            console.log('show controller / contact = ', contact);
+            if (contact === undefined) {
+              contactView = new Show.MissingContact();
+            } else {
+              contactView = new Show.Contact({
+                model: contact
+              });
+            }
 
-          ContactManager.mainRegion.show(contactView);
+            ContactManager.mainRegion.show(contactView);
+          });
         }
       };
     });

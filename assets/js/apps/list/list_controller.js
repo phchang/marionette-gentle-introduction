@@ -3,24 +3,25 @@ ContactManager.module('ContactsApp.List',
 
       List.Controller = {
         listContacts: function () {
-          var contacts = ContactManager.request('contact:entities');
+          var fetchingContacts = ContactManager.request('contact:entities');
 
-          var contactsListView = new List.Contacts({
-            collection: contacts
+          $.when(fetchingContacts).done(function (contacts) {
+            var contactsListView = new List.Contacts({
+              collection: contacts
+            });
+
+            contactsListView.on('childview:contact:delete',
+                function (childView, model) {
+                  model.destroy();
+                });
+
+            contactsListView.on('childview:contact:show',
+                function (childView, model) {
+                  ContactManager.trigger('contact:show', model.get('id'));
+                });
+
+            ContactManager.mainRegion.show(contactsListView);
           });
-
-          contactsListView.on('childview:contact:delete',
-              function (childView, model) {
-                model.destroy();
-              });
-
-          contactsListView.on('childview:contact:show',
-              function (childView, model) {
-                ContactManager.trigger('contact:show', model.get('id'));
-              });
-
-          ContactManager.mainRegion.show(contactsListView);
         }
       }
-
     });

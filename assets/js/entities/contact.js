@@ -59,11 +59,14 @@ ContactManager.module('Entities',
 
           var defer = $.Deferred();
 
-          contacts.fetch({
-            success: function (contacts) {
-              defer.resolve(contacts);
-            }
-          });
+          setTimeout(function () {
+            contacts.fetch({
+              success: function (contacts) {
+                defer.resolve(contacts);
+              }
+            });
+          }, 1000);
+
 
           var promise = defer.promise();
 

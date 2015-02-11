@@ -3,11 +3,11 @@ ContactManager.module('ContactsApp.Show',
       Show.Controller = {
         showContact: function (id) {
 
-          var contacts = ContactManager.request('contact:entities');
-          var contact = contacts.get(id);
+          var contact = ContactManager.request('contact:entity', id);
 
           var contactView;
 
+          console.log('show controller / contact = ', contact);
           if (contact === undefined) {
             contactView = new Show.MissingContact();
           } else {

@@ -65,7 +65,7 @@ ContactManager.module('Entities',
                 defer.resolve(contacts);
               }
             });
-          }, 1000);
+          }, 250);
 
 
           var promise = defer.promise();

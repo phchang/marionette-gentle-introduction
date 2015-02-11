@@ -6,9 +6,15 @@ ContactManager.module('ContactsApp.Show',
           var contacts = ContactManager.request('contact:entities');
           var contact = contacts.get(id);
 
-          var contactView = new Show.Contact({
-            model: contact
-          });
+          var contactView;
+
+          if (contact === undefined) {
+            contactView = new Show.MissingContact();
+          } else {
+            contactView = new Show.Contact({
+              model: contact
+            });
+          }
 
           ContactManager.mainRegion.show(contactView);
         }

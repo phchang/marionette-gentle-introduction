@@ -3,4 +3,8 @@ ContactManager.module('ContactsApp.Show',
       Show.Contact = Marionette.ItemView.extend({
         template: '#contact-view'
       });
+
+      Show.MissingContact = Marionette.ItemView.extend({
+        template: '#missing-contact-view'
+      });
     });

@@ -20,8 +20,11 @@ ContactManager.module('ContactsApp.Edit',
               });
 
               view.on('form:submit', function(data) {
-                contact.save(data);
-                ContactManager.trigger('contact:show', contact.get('id'));
+                if (contact.save(data)) {
+                  ContactManager.trigger('contact:show', contact.get('id'));
+                } else {
+                  view.triggerMethod('form:data:invalid', contact.validationError);
+                }
               });
             } else {
               view = new ContactManager.ContactsApp.Show.MissingContact();

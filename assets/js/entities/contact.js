@@ -96,7 +96,7 @@ ContactManager.module('Entities',
                 defer.resolve(undefined);
               }
             });
-          }, 2000);
+          }, 500);
 
           return defer.promise();
         }

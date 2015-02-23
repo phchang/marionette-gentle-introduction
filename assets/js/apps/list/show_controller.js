@@ -7,6 +7,7 @@ ContactManager.module('ContactsApp.Show',
             title: 'Artificial Loading Delay',
             message: 'Data loading is delayed to demonstrate using a loading view'
           });
+
           ContactManager.mainRegion.show(loadingView);
 
           var fetchingContact = ContactManager.request('contact:entity', id);
@@ -20,6 +21,10 @@ ContactManager.module('ContactsApp.Show',
             } else {
               contactView = new Show.Contact({
                 model: contact
+              });
+
+              contactView.on('contact:edit', function (contact) {
+                ContactManager.trigger('contact:edit', contact.get('id'));
               });
             }
 

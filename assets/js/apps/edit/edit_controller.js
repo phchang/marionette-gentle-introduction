@@ -23,7 +23,7 @@ ContactManager.module('ContactsApp.Edit',
                 if (contact.save(data)) {
                   ContactManager.trigger('contact:show', contact.get('id'));
                 } else {
-                  view.triggerMethod('form:data:invalid', contact.validationError);
+                  view.triggerMethod('form:data:invalid', contact.validationErrors);
                 }
               });
             } else {

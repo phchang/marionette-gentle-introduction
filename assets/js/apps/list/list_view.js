@@ -1,6 +1,15 @@
 ContactManager.module('ContactsApp.List',
     function(List, ContactManager, Bacbone, Marionette, $, _) {
 
+      /* p.141
+       * _Regions_ are areas that will remain displayed (semi-) permanently as
+       * the user navigates. Ex. A region to display the nav menu.
+       *
+       * Layouts are more like 'super views'–they behave like views but 
+       * in addition have areas where you can display sub-views. Layouts are
+       * meant to disappear when a uer navigates somewhere else and that view
+       * is no longer necessary.
+       */
       List.Layout = Marionette.LayoutView.extend({
         template: '#contact-list-layout',
 

@@ -21,7 +21,11 @@ ContactManager.module('ContactsApp.List',
       });
 
       List.Panel = Marionette.ItemView.extend({
-        template: '#contact-list-panel'
+        template: '#contact-list-panel',
+
+        triggers: {
+          'click button.js-new': 'contact:new'
+        }
       });
       
       List.Contact = Marionette.ItemView.extend({
@@ -79,6 +83,21 @@ ContactManager.module('ContactsApp.List',
         className: 'table table-hover',
         template: '#contact-list',
         childView: List.Contact,
-        childViewContainer: 'tbody'
+        childViewContainer: 'tbody',
+
+        initialize; function() {
+          // collectionEvents hash could also be used here
+          this.listenTo(this.collection, "reset", function() {
+            this.attachHtml = function(collectionView, childView, index) {
+              collectionView.$el.append(childView.el);
+            };
+          });
+        },
+
+        onRenderCollection: function() {
+          this.attachHtml = function(collectionView, childView, index) {
+            collectionView.$el.prepend(childView.el);
+          };
+        }
       });
     });

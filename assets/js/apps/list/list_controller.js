@@ -56,18 +56,30 @@ ContactManager.module('ContactsApp.List',
             });
 
             contactsListView.on('childview:contact:delete',
-                function (childView, model) {
-                  model.destroy();
+                function (childView, args) {
+                  args.model.destroy();
                 });
 
-            contactsListView.on('childview:contact:show',
-                function (childView, model) {
-                  ContactManager.trigger('contact:show', model.get('id'));
-                });
+            // P.153 The trigger handler will receive a single argument
+            // containing the view, model, and collection if applicable.
+            //
+            // contactsListView.on('childview:contact:show',
+            //     function (childView, model) {
+            //       ContactManager.trigger('contact:show', model.get('id'));
+            //     });
 
+            contactsListView.on('childview:contact:show', function(childView, args) {
+              ContactManager.trigger('contact:show', args.model.get('id'));
+            });
+
+
+
+            // this has also changed as a result of the triggers hash change from ^^^
             contactsListView.on('childview:contact:edit',
-                function(childView, model) {
+                function(childView, args) {
                   console.log('edit link clicked');
+
+                  var model = args.model;
 
                   var view = new ContactManager.ContactsApp.Edit.Contact({
                     model: model,

@@ -31,6 +31,7 @@ ContactManager.module('ContactsApp',
       });
 
       ContactManager.on('contact:show', function (id) {
+        console.log('contacts_app.js contacts:list event was captured');
         ContactManager.navigate('contacts/' + id);
         API.showContact(id);
       });

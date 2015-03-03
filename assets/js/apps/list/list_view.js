@@ -32,11 +32,18 @@ ContactManager.module('ContactsApp.List',
         tagName: 'tr',
         template: '#contact-list-item',
 
+        triggers: {
+          'click a.js-show': 'contact:show',
+          'click a.js-edit': 'contact:edit',
+          'click button.js-delete': 'contact:delete'
+        },
+
+        // moved from events hash to triggers
+        // 'click a.js-show': 'showClicked',
+        // 'click a.js-edit': 'editClicked',
+        // 'click button.js-delete': 'deleteClicked'
         events: {
-          click: 'highlightName',
-          'click a.js-show': 'showClicked',
-          'click a.js-edit': 'editClicked',
-          'click button.js-delete': 'deleteClicked'
+          click: 'highlightName'
         },
 
         highlightName: function (e) {
@@ -44,23 +51,31 @@ ContactManager.module('ContactsApp.List',
           this.$el.toggleClass('warning');
         },
 
-        showClicked: function (e) {
-          e.preventDefault();
-          e.stopPropagation();
-          this.trigger('contact:show', this.model);
-        },
 
-        editClicked: function(e) {
-          console.log('inside editClicked');
-          e.preventDefault();
-          e.stopPropagation();
-          this.trigger('contact:edit', this.model);
-        },
+        /*
+         * P.153 "[...] the triggers hash prevents the default event action,
+         * and stops the event propagation"
+         *
+         * "By default all triggers are stopped with preventDefault and
+         * stopPropagation methods."
+         */
+        // showClicked: function (e) {
+        //   e.preventDefault();
+        //   e.stopPropagation();
+        //   this.trigger('contact:show', this.model);
+        // },
 
-        deleteClicked: function (e) {
-          e.stopPropagation();
-          this.trigger('contact:delete', this.model);
-        },
+        // editClicked: function(e) {
+        //   console.log('inside editClicked');
+        //   e.preventDefault();
+        //   e.stopPropagation();
+        //   this.trigger('contact:edit', this.model);
+        // },
+
+        // deleteClicked: function (e) {
+        //   e.stopPropagation();
+        //   this.trigger('contact:delete', this.model);
+        // },
 
         remove: function () {
           this.$el.fadeOut(function () {
@@ -85,7 +100,7 @@ ContactManager.module('ContactsApp.List',
         childView: List.Contact,
         childViewContainer: 'tbody',
 
-        initialize; function() {
+        initialize: function() {
           // collectionEvents hash could also be used here
           this.listenTo(this.collection, "reset", function() {
             this.attachHtml = function(collectionView, childView, index) {
